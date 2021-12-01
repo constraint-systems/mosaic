@@ -6,6 +6,7 @@ import DstBlock from "./DstBlock";
 import MscBlock from "./MscBlock";
 import Button from "./Button";
 import { CanvasTexture, MeshBasicMaterial } from "three";
+import { imageScaler } from "./Constants";
 
 export type layoutBox = {
   left: number;
@@ -132,8 +133,8 @@ function App() {
     (srcPlaneRef.current!.material as MeshBasicMaterial).map =
       srcCanvasTextureRef.current;
     const srcPlane = srcPlaneRef.current!;
-    srcPlane.scale.x = srcCanvas.width / srcCanvas.height;
-    srcPlane.scale.y = 1;
+    srcPlane.scale.x = srcCanvas.width / imageScaler;
+    srcPlane.scale.y = srcCanvas.height / imageScaler;
     setSrcId(dstInfoRef.current!.id);
     setSrcInfo(dstInfoRef.current);
 
@@ -146,8 +147,8 @@ function App() {
     (dstPlaneRef.current!.material as MeshBasicMaterial).map =
       dstCanvasTextureRef.current;
     const dstPlane = dstPlaneRef.current!;
-    dstPlane.scale.x = dstCanvas.width / dstCanvas.height;
-    dstPlane.scale.y = 1;
+    dstPlane.scale.x = dstCanvas.width / imageScaler;
+    dstPlane.scale.y = dstCanvas.height / imageScaler;
     setDstId(holdInfo.id);
     setDstInfo(holdInfo);
   };
@@ -180,6 +181,7 @@ function App() {
     });
     rendererRef.current = renderer;
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
 
     const sceneSrc = new THREE.Scene();
     const sceneDst = new THREE.Scene();
@@ -460,9 +462,7 @@ function App() {
           position: "absolute",
           top: 0,
           right: 0,
-          left: 0,
           padding: 16,
-          display: "flex",
           justifyContent: "end",
           pointerEvents: "none",
           zIndex: 2,

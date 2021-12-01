@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { render } from "react-dom";
 import * as THREE from "three";
 
 export const UseWheelZoom = (
@@ -74,13 +75,14 @@ export const UsePointerPan = (rendererRef: any, camera: any) => {
     const handlePointerDown = (e: PointerEvent) => {
       e.preventDefault();
 
-      console.log("here");
-
       pointers.push({
         id: e.pointerId,
-        x: e.clientX,
-        y: e.clientY,
-        pointerDown: [e.clientX, e.clientY],
+        x: e.clientX - renderer.offsetLeft,
+        y: e.clientY - renderer.offsetTop,
+        pointerDown: [
+          e.clientX - renderer.offsetLeft,
+          e.clientY - renderer.offsetTop,
+        ],
         primary: e.isPrimary,
       });
       for (const pointer of pointers) {
@@ -98,19 +100,22 @@ export const UsePointerPan = (rendererRef: any, camera: any) => {
 
       if (pointers.length === 1) {
         const pointer = pointers[0];
-        pointer.x = e.clientX;
-        pointer.y = e.clientY;
+        pointer.x = e.clientX - renderer.offsetLeft;
+        pointer.y = e.clientY - renderer.offsetTop;
         const visibleHeight =
           2 * Math.tan((camera.fov * Math.PI) / 360) * cameraDown.current.z;
         const zoomPixel = visibleHeight / height;
-        diff.current.x = (e.clientX - pointer.pointerDown[0]) * zoomPixel;
-        diff.current.y = (e.clientY - pointer.pointerDown[1]) * zoomPixel;
+        diff.current.x =
+          (e.clientX - renderer.offsetLeft - pointer.pointerDown[0]) *
+          zoomPixel;
+        diff.current.y =
+          (e.clientY - renderer.offsetTop - pointer.pointerDown[1]) * zoomPixel;
         camera.position.x = cameraDown.current.x - diff.current.x;
         camera.position.y = cameraDown.current.y + diff.current.y;
       } else if (pointers.length === 2) {
         const pointer = pointers.filter((p) => p.id === e.pointerId)[0];
-        pointer.x = e.clientX;
-        pointer.y = e.clientY;
+        pointer.x = e.clientX - renderer.offsetLeft;
+        pointer.y = e.clientY - renderer.offsetTop;
 
         const a = pointers[0];
         const b = pointers[1];

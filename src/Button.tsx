@@ -16,11 +16,21 @@ const Button = ({
   useEffect(() => {
     const handlePointerDown = (e: PointerEvent) => {
       e.stopPropagation();
-      onClick(e);
     };
     buttonRef.current!.addEventListener("pointerdown", handlePointerDown);
     return () => {
       buttonRef.current!.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handlePointerDown = (e: MouseEvent) => {
+      e.stopPropagation();
+      onClick(e);
+    };
+    buttonRef.current!.addEventListener("click", handlePointerDown);
+    return () => {
+      buttonRef.current!.removeEventListener("click", handlePointerDown);
     };
   }, []);
 

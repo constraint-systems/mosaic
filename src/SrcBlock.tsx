@@ -55,7 +55,8 @@ const SrcBlock = ({
     const plane = new THREE.Mesh(geometry, material);
     srcPlaneRef.current = plane;
     scene.add(plane);
-    camera.position.z = 5;
+
+    camera.position.z = 8;
   }, []);
 
   useEffect(() => {
@@ -156,7 +157,7 @@ const SrcBlock = ({
   };
 
   useEffect(() => {
-    loadImage("/computers.jpg");
+    loadImage("/minidisc.jpg?=2");
   }, []);
 
   useEffect(() => {
@@ -232,7 +233,7 @@ const SrcBlock = ({
           onClick={() => {
             const input = inputRef.current!;
             input.dispatchEvent(
-              new MouseEvent("click", {
+              new PointerEvent("click", {
                 bubbles: true,
                 cancelable: true,
                 view: window,

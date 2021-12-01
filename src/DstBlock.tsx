@@ -60,7 +60,8 @@ const DstBlock = ({
     const plane = new THREE.Mesh(geometry, material);
     dstPlaneRef.current = plane;
     scene.add(plane);
-    camera.position.z = 5;
+
+    camera.position.z = 8;
   }, []);
 
   useEffect(() => {
@@ -160,7 +161,7 @@ const DstBlock = ({
   };
 
   useEffect(() => {
-    loadImage("/computers.jpg");
+    loadImage("/computers.jpg?=1");
   }, []);
 
   useEffect(() => {

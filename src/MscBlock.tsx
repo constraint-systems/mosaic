@@ -50,7 +50,8 @@ const MscBlock = ({
     const plane = new THREE.Mesh(geometry, material);
     planeRef.current = plane;
     scene.add(plane);
-    camera.position.z = 5;
+
+    camera.position.z = 8;
   }, []);
 
   const counterRef = useRef(0);
@@ -84,7 +85,7 @@ const MscBlock = ({
         .map((_, i) => i);
 
       const counter = counterRef.current;
-      const batchSize = 8;
+      const batchSize = 4;
       const drawCell = () => {
         if (
           counterRef.current === counter &&
