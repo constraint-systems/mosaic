@@ -22,6 +22,9 @@ const DstBlock = ({
   dstInfo,
   activeRef,
   pasteSrc,
+  srcInfo,
+  srcId,
+  dstId,
 }: {
   camera: THREE.PerspectiveCamera;
   box: layoutBox;
@@ -35,6 +38,9 @@ const DstBlock = ({
   dstInfo: any;
   activeRef: any;
   pasteSrc: string | null;
+  srcInfo: any;
+  srcId: string | null;
+  dstId: string | null;
 }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const smallCanvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -245,17 +251,22 @@ const DstBlock = ({
       >
         <div className="readout">{sizeReadout}</div>
         <div style={{ display: "flex", gap: 16 }}>
-          <Button
-            text="↕"
-            title="Swap src and dst"
-            style={{
-              transformOrigin: "center center",
-              transform: "rotate(90deg)",
-            }}
-            onClick={() => {
-              swapInfo();
-            }}
-          />
+          {srcInfo &&
+          srcInfo.id === srcId &&
+          dstInfo &&
+          dstInfo.id === dstId ? (
+            <Button
+              text="↕"
+              title="Swap src and dst"
+              style={{
+                transformOrigin: "center center",
+                transform: "rotate(90deg)",
+              }}
+              onClick={() => {
+                swapInfo();
+              }}
+            />
+          ) : null}
           <Button
             text="↑"
             title="Upload image"

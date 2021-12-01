@@ -19,7 +19,12 @@ const Button = ({
     };
     buttonRef.current!.addEventListener("pointerdown", handlePointerDown);
     return () => {
-      buttonRef.current!.removeEventListener("pointerdown", handlePointerDown);
+      if (buttonRef.current) {
+        buttonRef.current!.removeEventListener(
+          "pointerdown",
+          handlePointerDown
+        );
+      }
     };
   }, []);
 
@@ -30,7 +35,9 @@ const Button = ({
     };
     buttonRef.current!.addEventListener("click", handlePointerDown);
     return () => {
-      buttonRef.current!.removeEventListener("click", handlePointerDown);
+      if (buttonRef.current) {
+        buttonRef.current!.removeEventListener("click", handlePointerDown);
+      }
     };
   }, []);
 

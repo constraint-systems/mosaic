@@ -33,6 +33,7 @@ const MscBlock = ({
   const canvasTextureRef = useRef<THREE.CanvasTexture | null>(null);
   const planeRef = useRef<THREE.Mesh | null>(null);
   const [sizeReadout, setSizeReadout] = useState("");
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     camera.position.z = 0;
@@ -56,8 +57,7 @@ const MscBlock = ({
 
   const counterRef = useRef(0);
   useEffect(() => {
-    console.log("fire");
-    console.log(srcInfo, dstInfo);
+    setLoaded(false);
     if (srcInfo && dstInfo) {
       counterRef.current++;
       console.log("regen");
@@ -137,6 +137,7 @@ const MscBlock = ({
               ).map!.needsUpdate = true;
               if (cells.length === 0) {
                 console.log("done");
+                setLoaded(true);
               }
             }
             if (b === batchSize - 1) {
@@ -179,31 +180,36 @@ const MscBlock = ({
           justifyContent: "space-between",
           alignItems: "center",
           padding: 16,
+          height: 64,
         }}
       >
         <div className="readout">{sizeReadout}</div>
-        <Button
-          text="↓"
-          title="Download image"
-          onClick={() => {
-            canvasRef.current!.toBlob(async (blob) => {
-              const imageURL = URL.createObjectURL(blob!);
-              let link = document.createElement("a");
-              link.setAttribute(
-                "download",
-                "mosaic-" + Math.round(new Date().getTime() / 1000) + ".png"
-              );
-              link.setAttribute("href", imageURL);
-              link.dispatchEvent(
-                new MouseEvent(`click`, {
-                  bubbles: true,
-                  cancelable: true,
-                  view: window,
-                })
-              );
-            });
-          }}
-        />
+        {loaded ? (
+          <Button
+            text="↓"
+            title="Download image"
+            onClick={() => {
+              canvasRef.current!.toBlob(async (blob) => {
+                const imageURL = URL.createObjectURL(blob!);
+                let link = document.createElement("a");
+                link.setAttribute(
+                  "download",
+                  "mosaic-" + Math.round(new Date().getTime() / 1000) + ".png"
+                );
+                link.setAttribute("href", imageURL);
+                link.dispatchEvent(
+                  new MouseEvent(`click`, {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window,
+                  })
+                );
+              });
+            }}
+          />
+        ) : (
+          <div style={{ color: "#888" }}>processing...</div>
+        )}
       </div>
     </div>
   );

@@ -437,6 +437,9 @@ function App() {
               dstPlaneRef={dstPlaneRef}
               setDstId={setDstId}
               dstInfo={dstInfo}
+              srcInfo={srcInfo}
+              srcId={srcId}
+              dstId={dstId}
               activeRef={activeRef}
               pasteSrc={dstPasteSrc}
             />
