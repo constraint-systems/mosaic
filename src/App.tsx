@@ -190,13 +190,14 @@ function App() {
 
     {
       const geometry = new THREE.PlaneGeometry(1, 1);
-      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+      const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
+
       const plane = new THREE.Mesh(geometry, material);
       sceneDst.add(plane);
     }
     {
       const geometry = new THREE.PlaneGeometry(1, 1);
-      const material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+      const material = new THREE.MeshBasicMaterial({ color: 0x000000 });
       const plane = new THREE.Mesh(geometry, material);
       sceneMsc.add(plane);
     }
@@ -285,6 +286,7 @@ function App() {
 
   useEffect(() => {
     const onPaste = (e: any) => {
+      const ref = activeRef;
       e.preventDefault();
       e.stopPropagation();
       for (const item of e.clipboardData.items) {
@@ -293,9 +295,9 @@ function App() {
         }
         let file = item.getAsFile();
         let src = URL.createObjectURL(file);
-        if (activeRef.current === 0) {
+        if (ref.current === 0) {
           setSrcPasteSrc(src);
-        } else if (activeRef.current === 1) {
+        } else if (ref.current === 1) {
           setDstPasteSrc(src);
         } else {
           alert("Choose the SRC or DST block to paste to");
@@ -304,13 +306,14 @@ function App() {
     };
 
     const onDrop = (e: any) => {
+      const ref = activeRef;
       e.preventDefault();
       e.stopPropagation();
       let file = e.dataTransfer.files[0];
       let src = URL.createObjectURL(file);
-      if (activeRef.current === 0) {
+      if (ref.current === 0) {
         setSrcPasteSrc(src);
-      } else if (activeRef.current === 1) {
+      } else if (ref.current === 1) {
         setDstPasteSrc(src);
       } else {
         alert("Drag to the SRC or DST block");
