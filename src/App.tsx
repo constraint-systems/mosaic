@@ -529,10 +529,18 @@ function App() {
             <div style={{ marginBottom: 16 }}>
               Recreate one image using the tiles from another image.
             </div>
-            <div>
+            <div style={{ marginBottom: 16 }}>
               from{" "}
               <a href="https://constraint.systems/" target="_blank">
                 Constraint Systems
+              </a>
+            </div>
+            <div>
+              <a
+                href="https://github.com/constraint-systems/mosaic"
+                target="_blank"
+              >
+                View source
               </a>
             </div>
           </div>

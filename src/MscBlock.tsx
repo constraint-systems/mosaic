@@ -85,7 +85,7 @@ const MscBlock = ({
         .map((_, i) => i);
 
       const counter = counterRef.current;
-      const batchSize = 4;
+      const batchSize = 8;
       const drawCell = () => {
         if (
           counterRef.current === counter &&
