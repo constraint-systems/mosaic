@@ -19,6 +19,8 @@ The image proccessing works like this:
 
 The chosen sizes are pretty much just what I thought would work, trying to balance between accuracy and speed of processing.
 
+The calcuations and image processing are all done using HTML Canvas. Three.js is used to make each canvas zoomable.
+
 A kind of fun result of this method is that different devices (and possibly browsers?) will handle the resizing sampling differently. I get different results on my phone versus my laptop.
 
 ## Dev
