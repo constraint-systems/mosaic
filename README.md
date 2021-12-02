@@ -1,3 +1,5 @@
+# Mosaic
+
 <img
 src='https://raw.githubusercontent.com/constraint-systems/mosaic/main/public/mosaic.gif'
 width="600"/>
