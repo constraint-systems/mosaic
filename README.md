@@ -10,12 +10,12 @@ https://mosaic.constraint.systems
 
 The image proccessing works like this:
 
-- reduce each image to a quarter of their original size
+- reduce each image to a quarter of its original size
 - break each reduced size image into 4x4 cells
-- for each cell in the DST image, loop through each cell in the SRC image and find the cell that has the closest RGB values for each of the four pixels
-- copy and draw the corresponding original 16x16 cell from the SRC image
+- for each cell in the DST image, loop through each cell in the SRC image and find the cell that has the closest RGB values for each of its four pixels
+- copy and draw the original 16x16 cell from the SRC image in the position of the DST cell
 
-The chosen sizes are pretty much just what I thought would work, balancing between accuracy and speed of processing.
+The chosen sizes are pretty much just what I thought would work, trying to balance between accuracy and speed of processing.
 
 A kind of fun result of this method is that different devices (and possibly browsers?) will handle the resizing sampling differently. I get different results on my phone versus my laptop.
 
