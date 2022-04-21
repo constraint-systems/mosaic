@@ -184,7 +184,7 @@ const DstBlock = ({
     return () => {
       inputRef.current!.removeEventListener("change", handleChange);
     };
-  }, []);
+  });
 
   useEffect(() => {
     if (dstInfo) {

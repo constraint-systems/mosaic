@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import { render } from "react-dom";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export const UseWheelZoom = (
