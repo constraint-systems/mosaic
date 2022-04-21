@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLayout } from "./Utils";
 import * as THREE from "three";
 import SrcBlock from "./SrcBlock";
 import DstBlock from "./DstBlock";
@@ -531,12 +530,12 @@ function App() {
             </div>
             <div style={{ marginBottom: 16 }}>
               from{" "}
-              <a href="https://constraint.systems/" target="_blank">
+              <a href="https://constraint.systems/" rel="noreferrer" target="_blank">
                 Constraint Systems
               </a>
             </div>
             <div>
-              <a
+              <a rel="noreferrer"
                 href="https://github.com/constraint-systems/mosaic"
                 target="_blank"
               >
